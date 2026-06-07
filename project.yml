@@ -1,0 +1,52 @@
+name: Shade_
+options:
+  bundleIdPrefix: com.pushingsquares
+  deploymentTarget:
+    macOS: "14.0"
+targets:
+  Shade_:
+    type: application
+    platform: macOS
+    sources:
+      - path: Shade_
+        excludes:
+          - "SHADE_ICON.icon"
+          - "Schedule/Resources/cities.json"
+      - path: Shade_/SHADE_ICON.icon
+        type: file
+        buildPhase: resources
+      - path: Shade_/Schedule/Resources/cities.json
+        type: file
+        buildPhase: resources
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.pushingsquares.shade
+      PRODUCT_NAME: Shade_
+      ASSETCATALOG_COMPILER_APPICON_NAME: SHADE_ICON
+      MARKETING_VERSION: "0.1.0"
+      CURRENT_PROJECT_VERSION: 1
+      SWIFT_VERSION: "6.0"
+      MACOSX_DEPLOYMENT_TARGET: "14.0"
+      CODE_SIGN_STYLE: Automatic
+      CODE_SIGN_ENTITLEMENTS: Shade_/Shade.entitlements
+      INFOPLIST_FILE: Shade_/Info.plist
+  ShadeTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - ShadeTests
+    dependencies:
+      - target: Shade_
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.pushingsquares.shade.tests
+      GENERATE_INFOPLIST_FILE: YES
+      SWIFT_VERSION: "6.0"
+      MACOSX_DEPLOYMENT_TARGET: "14.0"
+schemes:
+  Shade_:
+    build:
+      targets:
+        Shade_: all
+        ShadeTests: [test]
+    test:
+      targets:
+        - ShadeTests
